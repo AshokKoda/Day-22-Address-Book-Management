@@ -19,6 +19,7 @@ public class ImplAddressBook implements IAddressBook {
 	static ArrayList<Person> persons = new ArrayList<Person>();
 	Scanner scanner = new Scanner(System.in);
 	String statename = "";
+	int indexOfPerson;
 	
 	//method for reading json
 	public void readJson() {
@@ -63,6 +64,9 @@ public class ImplAddressBook implements IAddressBook {
 				case 1:
 					addPerson(); //Add person
 					break;
+				case 2:
+					editPerson(); //Edit person
+					break;
 				default:
 					System.out.println("Invalid option");
 				}
@@ -102,6 +106,9 @@ public class ImplAddressBook implements IAddressBook {
 				switch (scanner.nextInt()) {
 				case 1:
 					addPerson(); //add person
+					break;
+				case 2:
+					editPerson(); //Edit person
 					break;
 					
 				default:
@@ -222,6 +229,43 @@ public class ImplAddressBook implements IAddressBook {
 			counter++;
 		}
 		
+	}
+
+	//method for edit person from array list
+	@Override
+	public void editPerson() {
+		
+		if (counter > 0) {
+			System.out.println("Enter Persons mobile number you want to edit:");
+			Long searchMobile = scanner.nextLong();
+			indexOfPerson = 0;
+			boolean isFoundPerson = false;
+			for (int i = 0; i < persons.size(); i++) {
+				if (searchMobile == persons.get(i).getMobile()) {
+					isFoundPerson = true;
+					indexOfPerson = i;
+					break;
+				}
+			}
+			if (isFoundPerson) {
+
+				System.out.println("enter new address");
+				persons.get(indexOfPerson).getAddressObj().setAddressLocal(scanner.next());
+				System.out.println("enter new city name");
+				persons.get(indexOfPerson).getAddressObj().setCity(scanner.next());
+				System.out.println("enter new zip");
+				persons.get(indexOfPerson).getAddressObj().setZip(scanner.nextInt());
+
+				persons.get(indexOfPerson).setMobile(searchMobile);
+
+				System.out.println();
+				System.out.println("Edit completed");
+
+			} else
+				System.out.println("No person found with this number");
+		} else
+			System.out.println("There is no record to edit");
+
 	}
 
 }

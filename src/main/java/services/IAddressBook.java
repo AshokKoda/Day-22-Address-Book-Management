@@ -11,4 +11,5 @@ public interface IAddressBook {
 	public void saveAs() throws FileNotFoundException;
 	
 	public void addPerson();
+	public void editPerson();
 }
