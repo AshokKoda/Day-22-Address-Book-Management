@@ -67,6 +67,9 @@ public class ImplAddressBook implements IAddressBook {
 				case 2:
 					editPerson(); //Edit person
 					break;
+				case 3:
+					deletePerson(); //delete person
+					break;
 				default:
 					System.out.println("Invalid option");
 				}
@@ -109,6 +112,9 @@ public class ImplAddressBook implements IAddressBook {
 					break;
 				case 2:
 					editPerson(); //Edit person
+					break;
+				case 3:
+					deletePerson(); //delete person
 					break;
 					
 				default:
@@ -266,6 +272,33 @@ public class ImplAddressBook implements IAddressBook {
 		} else
 			System.out.println("There is no record to edit");
 
+	}
+
+	//method for delete Person from array list
+	@Override
+	public void deletePerson() {
+		if (counter > 0) {
+			System.out.println("Enter Persons mobile number you want to delete:");
+			Long Mobilesearch = scanner.nextLong();
+			indexOfPerson = 0;
+			boolean isFoundPerson = false;
+			for (int i = 0; i < persons.size(); i++) {
+				if (Mobilesearch == persons.get(i).getMobile()) {
+					isFoundPerson = true;
+					indexOfPerson = i;
+					break;
+				}
+			}
+			if (isFoundPerson) {
+				persons.remove(indexOfPerson);
+				counter--;
+				System.out.println();
+				System.out.println("Delete completed");
+			} else
+				System.out.println("No person found with this number");
+		} else
+			System.out.println("No records to delete");
+		
 	}
 
 }
