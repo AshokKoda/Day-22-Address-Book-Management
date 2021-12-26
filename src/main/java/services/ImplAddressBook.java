@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -298,6 +299,24 @@ public class ImplAddressBook implements IAddressBook {
 				System.out.println("No person found with this number");
 		} else
 			System.out.println("No records to delete");
+		
+	}
+
+	@Override
+	public void sortByName() {
+		if (counter > 1) {
+			System.out.println("Sorting by Last name is selected");
+			
+			Collections.sort(persons, (e1, e2) -> e1.getLastname().compareTo(e2.getLastname()));
+			System.out.println("Please wait...");
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Sorting is completed to see the result select print option");
+		}else
+			System.out.println("Less records to sort");
 		
 	}
 
